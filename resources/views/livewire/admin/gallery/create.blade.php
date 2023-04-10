@@ -36,7 +36,7 @@
             
                                 <button x-on:click="$refs.image.click()" class=" px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-70 flex items-center justify-center">
                                     <i class="ico icon-image mr-1 text-lg"></i>
-                                     Seleccionar imagen de portada
+                                     Seleccionar imagen
                                 </button>
             
                                 @error('image')
