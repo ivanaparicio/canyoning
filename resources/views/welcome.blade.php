@@ -88,9 +88,9 @@
 
                 <ul class="slider3 owl-carousel owl-theme mt-16">
                     @foreach ($reviews as $item)
-                        <li>
+                        <li >
                             <a href="{{ $item->link }}" target="_blank" class="flex items-center space-x-1.5">
-                                <div>
+                                <div class="min-w-max">
                                     @if ($item->profile)
                                         <img class="h-16 w-16 rounded-full border object-cover object-center" src="{{ Storage::url($item->profile) }}" >
                                     @else
