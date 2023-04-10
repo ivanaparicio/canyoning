@@ -9,6 +9,13 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <meta name="keywords" content="Canyoning san gil santander, deportes extremos san gil santander, canotaje san gil santander, desportes extremos santander, deportes de aventura san gil santander">
+        <meta name="geo.position" content="6.552436;-73.131748 ">
+        <meta name="geo.region" content="CO-SAN">
+        <meta name="geo.placename" content="San Gil">
+        <meta property="og:title" content="Deportes Extremos en San Gil Santander Canyoning">
+        <meta property="og:description" content="Deportes extremos en San Gil Santander para llegar al límite: Parapente, Rafting, Torrentismo y mucho más. Consulta nuestros planes ☎ 3232253868">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
