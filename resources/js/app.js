@@ -8,3 +8,5 @@ window.Alpine = Alpine;
 Alpine.plugin(collapse);
 
 Alpine.start();
+
+import './alpine';
