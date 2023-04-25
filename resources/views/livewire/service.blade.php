@@ -6,7 +6,7 @@
 
             <section class="md:col-span-7">
                 <div class="flex justify-center">
-                    <img class="object-cover object-center h-96 w-full" src="{{ Storage::url($service->image->url) }}">
+                    <img class="object-cover object-center h-[34rem] w-full" src="{{ Storage::url($service->image->url) }}">
                 </div>
 
                 <div class="mt-8 ">
