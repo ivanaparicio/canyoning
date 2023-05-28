@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Services;
 
 use App\Models\Service;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
@@ -12,10 +13,12 @@ class Create extends Component
 
     use WithFileUploads;
 
-    public $image, $title, $content, $body = '', $status = '1';
+    public $keyMain=0, $preImages=[];
+
+    public $images=[], $title, $content, $body = '', $status = '1';
 
     protected $validationAttributes = [
-        'image'     => 'imagen de portada',
+        'images'    => 'imagenes',
         'title'     => 'nombre del servicio',
         'content'   => 'descripción corta',
         'body'      => 'descripción larga',
@@ -25,12 +28,20 @@ class Create extends Component
     protected function rules()
     {
         return [
-            'image'     => 'required|image',
+            'images'    => 'required|array',
+            'images.*'  => 'required|image',
             'title'     => 'required|string|max:250|unique:services',
             'content'   => 'required|string|max:1000',
             'body'      => 'required|string|max:3000',
             'status'    => 'required|integer|min:0|max:1',
         ];
+    }
+
+    public function updatedPreImages($value){
+        $this->validate(['preImages.*' => 'required|image'], [], ['preImages' => 'imagenes']);
+        foreach ($value as $key => $image) {
+            $this->images[] = $image;
+        }
     }
 
     public function render()
@@ -49,14 +60,23 @@ class Create extends Component
             'content'   => $this->content,
             'body'      => $this->body,
             'status'    => $this->status,
-        ]);
+        ]);        
 
-        $url = $this->image->store('images/services');
+        foreach ($this->images as $key => $image) {
 
-        $service->image()->create([
-            'url' => $url,
-        ]);
+            $url = $image->store('images/services');
+
+            $service->image()->create([
+                'is_main' => $this->keyMain == $key ? 1 : 0,
+                'url' => $url,
+            ]);
+
+        }
 
         return redirect()->route('services.index')->with('success', 'Servicio creado con éxito');
+    }
+
+    public function deleteImage($key){
+        unset($this->images[$key]);
     }
 }

@@ -1,5 +1,10 @@
 [x-cloak] { display: none !important; }
 
+.flex-direction-nav a {
+    height: 60px !important
+}
+
+
 .btn {
     @apply px-4 py-2 rounded-full
 }

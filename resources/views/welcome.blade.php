@@ -36,7 +36,7 @@
                 @foreach ( $services as $service)
                     <li class="min-h-full">
                         <div class="overflow-hidden rounded-2xl bg-white shadow-xl h-full mb-10 flex flex-col pb-4" style="max-height: 35rem; min-height: 35rem">
-                            <img class="object-cover object-center " style="max-height: 20rem; min-height: 20rem" src="{{ Storage::url($service->image->url) }}" alt="">
+                            <img class="object-cover object-center " style="max-height: 20rem; min-height: 20rem" src="{{ Storage::url($service->image->where('is_main', 1)->first()->url) }}" alt="">
 
                             <div class="p-5">
                                 <span class="font-semibold text-xs md:text-base uppercase">

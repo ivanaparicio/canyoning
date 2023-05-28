@@ -20,8 +20,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('vendor/icomoon-v1.0/style.css') }}?v1">
+        <link rel="stylesheet" href="{{ asset('vendor/flex-slider/flexslider.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="{{ asset('vendor/icomoon-v1.0/style.css') }}?v1">
         @livewireStyles
 
         <!-- Scripts -->

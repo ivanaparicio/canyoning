@@ -8,15 +8,38 @@
 
             <div class="">
 
-                <x-input-label value="Imagen de portada" class="mb-1"/>
+                <x-input-label value="Images" class="mb-1"/>
 
-                <div class="flex justify-center">
+                <ul class="grid grid-cols-4 mb-4 gap-4">
 
-                    @if ($image)
-                        <img class="h-80 object-cover object-center mb-4" src="{{ $image->temporaryUrl() }}">
-                    @endif
+                    @forelse ($images as $key => $image)
+                        <li class="relative" wire:key='image-{{$key}}'>
+
+                            @if ($key == $keyMain)
+                                <div wire:key='main-{{$key}}' class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+                                    <span class="text-white font-bold">Principal</span>
+                                </div>
+                            @else
+                                <div wire:key='second-{{$key}}' wire:click="$set('keyMain', {{$key}})" 
+                                    class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-60 flex items-center justify-center cursor-pointer">
+                                    <span class="text-white font-bold text-center">Seleccionar como <br> portada</span>
+                                </div>
+
+                                <button wire:click="deleteImage({{$key}})"
+                                    class="absolute top-2 right-2 border rounded text-slate-700 font-bold h-8 w-8 bg-white">
+                                    &times;
+                                </button>
+                            @endif
+
+                            <img class="h-40 w-full object-cover object-center" src="{{ $image->temporaryUrl() }}">
+                        </li>
+                    @empty
+                        <li class="text-center font-semibold col-span-full">
+                            No se encontraron imagenes
+                        </li>
+                    @endforelse
                     
-                </div>
+                </ul>
 
                 <div x-data="loadFile()" x-bind="loading" class="flex flex-col items-center justify-center mt-2 flex-1">
 
@@ -24,14 +47,22 @@
                         <div class="bg-blue-600 h-2" :style="`width: ${progress}%;`"></div>
                     </div>
 
-                    <input type="file" x-ref="image" accept="image/*" wire:model="image" class="hidden">
+                    <input type="file" x-ref="image" multiple accept="image/*" wire:model="preImages" class="hidden">
 
-                    <button x-on:click="$refs.image.click()" class=" px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-70 flex items-center justify-center">
+                    <button x-on:click="$refs.image.click()" class=" px-4 py-1 bg-blue-500 text-white rounded disabled:opacity-70 flex items-center justify-center">
                         <i class="ico icon-image mr-1 text-lg"></i>
-                         Seleccionar imagen de portada
+                         Seleccionar imagenes
                     </button>
 
-                    @error('image')
+                    @error('images')
+                        <span class="text-red-600 text-sm">{{ $message }}</span>
+                    @enderror
+
+                    @error('preImages')
+                        <span class="text-red-600 text-sm">{{ $message }}</span>
+                    @enderror
+
+                    @error('preImages.*')
                         <span class="text-red-600 text-sm">{{ $message }}</span>
                     @enderror
 
